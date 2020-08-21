@@ -8,14 +8,13 @@ class Mover {
   float r;
   int[] c = {0,0,0};
   
-  
   Mover(float m, float x , float y) {
     //[full] Now setting these variables with arguments
     mass = m;
-    r = mass*16;
+    r = mass*8;
     location = new PVector(x,y);
     //[end]
-    velocity = new PVector(random(-4,4),0);
+    velocity = new PVector(0,0);
     acceleration = new PVector(0,0);
   }
 
@@ -40,7 +39,7 @@ class Mover {
     stroke(0);
     fill(c[0],c[1],c[2]);
     //[offset-down] Scaling the size according to mass.
-    circle(location.x, location.y, r);
+    circle(location.x, location.y, r*2);
     popMatrix();
   }
 
@@ -53,7 +52,8 @@ class Mover {
       velocity.x *= -1;
       location.x = 0;
     }
-
+    
+    //Here we are going to have to check with which of the point intervals it may be colliding with.
     if (location.y > height) {
       // Even though we said we shouldn't touch location and velocity directly, there are some exceptions.
       // Here we are doing so as a quick and easy way to reverse the direction of our object when it reaches the edge.
