@@ -5,7 +5,7 @@ int[][] colorArray = {{255,0,0},{0,255,0},{0,10,250},{255,255,0},{0,255,255}};
 
 int lastMousePress = 0;
 
-//                  x    y   w    h
+//                       x   y   w    h
 int[] resetButtonData = {50, 50, 100, 30};
 String resetButtonText = "Reset";
 
@@ -47,7 +47,7 @@ void draw() {
     mover.applyForce(friction);
     mover.applyForce(wind);
     mover.applyForce(gravity);
-  //[end]
+    //Call nescesarry mover methods
     mover.checkEdges();
     mover.update();
     mover.display();
