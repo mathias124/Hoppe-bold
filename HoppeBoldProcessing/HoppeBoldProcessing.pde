@@ -111,12 +111,11 @@ void drawFloor(){
       beginShape();
         vertex(0,height);
         for (PVector floorPoint : floorPoints){
-          vertex(floorPoint.x, floorPoint.y+a*3);
+          vertex(floorPoint.x, floorPoint.y+a*2);
         }
         vertex(width, height);
       endShape();
     }
-
   popMatrix();
 }
 
