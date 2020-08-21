@@ -2,10 +2,7 @@ ArrayList<Mover> movers = new ArrayList<Mover>();
 
 void setup() {
   size(600,600);
-  for (int i = 0; i < 20; i++) {
-    // Initializing many Mover objects, all with random mass (and all starting at 0,0)
-    movers.add(new Mover(random(0.1,5),random(0,600),random(0,600)));
-  }
+  
 }
 
 void draw() {
@@ -24,4 +21,7 @@ void draw() {
     mover.display();
     mover.checkEdges();
   }
+}
+void mousePressed() {
+  movers.add(new Mover(random(0.2,5),mouseX,mouseY));
 }
