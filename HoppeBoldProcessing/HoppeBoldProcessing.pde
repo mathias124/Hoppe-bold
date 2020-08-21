@@ -28,12 +28,12 @@ void draw() {
 
   //[full] Loop through all objects and apply both forces to each object.
   for (Mover mover : movers) {
-    mover.applyForce(wind);
+    //mover.applyForce(wind);
+    mover.checkEdges();
     mover.applyForce(gravity);
   //[end]
     mover.update();
     mover.display();
-    mover.checkEdges();
   }
 }
 

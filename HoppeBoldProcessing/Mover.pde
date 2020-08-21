@@ -5,16 +5,17 @@ class Mover {
   PVector acceleration;
   // The object now has mass!
   float mass;
-  
-int[] c = {0,0,0};
+  float r;
+  int[] c = {0,0,0};
   
   
   Mover(float m, float x , float y) {
     //[full] Now setting these variables with arguments
     mass = m;
+    r = mass*16;
     location = new PVector(x,y);
     //[end]
-    velocity = new PVector(0,0);
+    velocity = new PVector(random(-4,4),0);
     acceleration = new PVector(0,0);
   }
 
@@ -39,7 +40,7 @@ int[] c = {0,0,0};
     stroke(0);
     fill(c[0],c[1],c[2]);
     //[offset-down] Scaling the size according to mass.
-    ellipse(location.x,location.y,mass*16,mass*16);
+    circle(location.x, location.y, r);
     popMatrix();
   }
 
