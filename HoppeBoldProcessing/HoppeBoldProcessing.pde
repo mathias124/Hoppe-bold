@@ -24,18 +24,16 @@ void generateFloor(int numOfPoints){
 }
 
 void draw() {
-  background(255);
-  //UPDATE CYCLE
   collideMovers();
-  //DRAW CYCLE
+  background(255);
   drawFloor();
   drawResetButton();
+  
   PVector wind = new PVector(0.01,0);
-  // Make up two forces.
   PVector gravity = new PVector(0,0.1);
-
-  //[full] Loop through all objects and apply both forces to each object.
+  //Loop through all objects and apply both forces to each object as well as calculating and applying the friction.
   for (Mover mover : movers) {
+    collideFloor(mover);
     //Calculating the friction force
     float c = 0.01;
     PVector friction = mover.velocity.get();
@@ -47,6 +45,7 @@ void draw() {
     mover.applyForce(friction);
     mover.applyForce(wind);
     mover.applyForce(gravity);
+    
     //Call nescesarry mover methods
     mover.checkEdges();
     mover.update();
@@ -75,6 +74,31 @@ void collideMovers(){
     }
   }
 }
+
+void collideFloor(Mover mover){
+  //We go through all but the last one
+  for(int i = 0; i < floorPoints.size()-1; i++){
+    PVector p1 = floorPoints.get(i);
+    PVector p2 = floorPoints.get(i+1);
+    if (p1.x <= mover.location.x && p2.x >= mover.location.x){
+      float dx = p2.x-p1.x;
+      float dy = p2.y-p1.y;
+      //We calculate the y-coordinate of where the collision is supposed to happen from the balls x-coordinate and the two points
+      float yCollision = (dy/dx * (mover.location.x - p1.x)) + p1.y;
+      if (yCollision <= mover.location.y || yCollision <= mover.location.y + mover.velocity.y/2){
+        PVector p1p2 = new PVector(dx, dy);
+        mover.velocity.mult(-1);
+        float angle = PVector.angleBetween(mover.velocity, p1p2);
+        mover.velocity.rotate(PI-angle);
+        mover.location.y = yCollision;
+      }
+      //THE COLLISION CHECK HAS BEEN DONE
+      break;
+    }
+  
+  }
+}
+
 
 //The floor is drawn in the order the points appear in the arraylist. Therefore it is important to remember adding the points in the right order.
 void drawFloor(){
@@ -105,7 +129,8 @@ void mousePressed() {
   }
   else{
     //We check how long it has been since we spawned the last ball, if it has been long enough (0,5 s) we spawn a new one
-    if(millis()-lastMousePress > 500){
+    //We also have to make sure that the user doesn't spawn a ball below the new floor
+    if(millis()-lastMousePress > 500 && mouseY < height-height/4){
       lastMousePress = millis();
       //Adding the new ball to the list of balls
       movers.add(new Mover(random(0.2,5),mouseX,mouseY));
