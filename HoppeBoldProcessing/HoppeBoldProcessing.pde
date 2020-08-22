@@ -1,6 +1,6 @@
 ArrayList<Mover> movers = new ArrayList<Mover>();
 ArrayList<PVector> floorPoints = new ArrayList<PVector>();
-
+PImage img;
 int[][] colorArray = {{255,0,0},{0,255,0},{0,10,250},{255,255,0},{0,255,255}};
 
 int lastMousePress = 0;
@@ -13,6 +13,7 @@ void setup() {
   size(600,600);
   //Generating the floor terrain
   generateFloor(10);
+  img = loadImage("pict.PNG");
 }
 
 void generateFloor(int numOfPoints){
@@ -25,7 +26,9 @@ void generateFloor(int numOfPoints){
 
 void draw() {
   collideMovers();
-  background(255);
+  //background(255);
+  image(img,0,0);
+  img.resize(600,600);
   drawFloor();
   drawResetButton();
   
