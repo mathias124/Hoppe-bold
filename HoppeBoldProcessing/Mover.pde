@@ -1,5 +1,4 @@
 class Mover {
-
   PVector location;
   PVector velocity;
   PVector acceleration;
