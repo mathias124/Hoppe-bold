@@ -54,8 +54,13 @@ void draw() {
     mover.update();
     mover.display();
   }
+  for (int i = 0; i < movers.size(); i++){
+    if (movers.get(i).alpha <= 10){
+      //Check whether any of them should be deleted
+      movers.remove(i);
+    }
+  }
 }
-
 void collideMovers(){
   //We have to have a nested loop with movers as our iterator as I couldn't be bothered to think about better time-complexities n^2 it is.
   for (Mover mover1 : movers){

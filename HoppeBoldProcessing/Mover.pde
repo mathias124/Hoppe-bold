@@ -5,6 +5,8 @@ class Mover {
   float mass;
   float r;
   int[] c = {0,0,0};
+  float alpha = 255;
+  int amount_still = 0;
   
   Mover(float m, float x , float y) {
     mass = m;
@@ -25,10 +27,24 @@ class Mover {
   }
 
   void display() {
+    //We check whether the mover is actually moving or pretty much standing still
+    if (velocity.mag() <= 0.5){
+      amount_still++;
+    }else{
+      //If it starts moving we reset the values
+      amount_still = 0;
+      alpha = 255;
+    }
+    
+    if (amount_still >= 10){
+      alpha -= 10;
+    }
     pushMatrix();
     stroke(0);
-    fill(c[0],c[1],c[2]);
+    fill(c[0],c[1],c[2], alpha);
     circle(location.x, location.y, r*2);
+    fill(0);
+    circle(location.x, location.y, 1);
     popMatrix();
   }
 
