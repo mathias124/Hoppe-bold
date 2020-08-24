@@ -57,13 +57,5 @@ class Mover {
       velocity.x *= -1;
       location.x = 0;
     }
-    
-    //Here we are going to have to check with which of the point intervals it may be colliding with.
-    /*if (location.y > height) {
-      // Even though we said we shouldn't touch location and velocity directly, there are some exceptions.
-      // Here we are doing so as a quick and easy way to reverse the direction of our object when it reaches the edge.
-      velocity.y *= -1;
-      location.y = height;
-    }*/
   }
 }

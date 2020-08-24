@@ -139,7 +139,7 @@ void drawResetButton(){
 
 void mousePressed() {
   if ((mouseX > resetButtonData[0] && mouseX < resetButtonData[0]+resetButtonData[2]) && (mouseY > resetButtonData[1] && mouseY < resetButtonData[1]+resetButtonData[3])){
-    movers = new ArrayList<Mover>();
+    movers.clear();
   }
   else{
     //We check how long it has been since we spawned the last ball, if it has been long enough (0,5 s) we spawn a new one
@@ -147,7 +147,7 @@ void mousePressed() {
     if(millis()-lastMousePress > 500 && mouseY < height-height/4){
       lastMousePress = millis();
       //Adding the new ball to the list of balls
-      movers.add(new Mover(random(0.2,5),mouseX,mouseY));
+      movers.add(new Mover(random(1,6),mouseX,mouseY));
       //We choice a random index of the random index of the color array.
       int randomIndex = (int) random(0,colorArray.length);
       //We take the last Mover object in movers and chage the color to the randomly chosen one above
