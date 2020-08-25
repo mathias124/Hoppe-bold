@@ -35,10 +35,11 @@ class Mover {
       amount_still = 0;
       alpha = 255;
     }
-    
+    //If it is standing still we make it increasingly more opaque
     if (amount_still >= 10){
       alpha -= 10;
     }
+    //We draw the mover
     pushMatrix();
     stroke(0);
     fill(c[0],c[1],c[2], alpha);
